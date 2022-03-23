@@ -3,6 +3,7 @@ package com.example.mycoronav.repository
 import android.util.Log
 import com.example.mycoronav.common.Constants
 import com.example.mycoronav.network.RetrofitClient
+import com.example.mycoronav.network.RetrofitClient2
 import com.example.mycoronav.network.RetrofitService
 import com.example.mycoronav.vo.ResponseData
 import com.example.mycoronav.vo.Row
@@ -13,7 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object RepositoryImpl : Repository {
-    private val retrofit = RetrofitClient.getInstance()
+//    private val retrofit = RetrofitClient.getInstance()
+    private val retrofit = RetrofitClient2.getInstance().get()
     var rows: ArrayList<Row> = ArrayList()
     val retrofitService = retrofit.create(RetrofitService::class.java)
     var onReturn: ((ArrayList<Row>) -> Unit)? = null

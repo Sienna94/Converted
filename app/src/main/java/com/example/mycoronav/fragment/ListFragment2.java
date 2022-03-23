@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class ListFragment2 extends Fragment {
     private FragmentListBinding binding;
     //adapter
-//    private ListViewAdapter listViewAdapter;
     private ListViewAdapter2 listViewAdapter;
     private LinearLayoutManager linearLayoutManager;
     private SharedViewModel sharedViewModel;

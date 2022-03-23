@@ -47,9 +47,20 @@ public class ListViewAdapter2 extends RecyclerView.Adapter<ListViewAdapter2.View
             binding.delBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //
+                    //클릭 이벤트 액티비티에서 처리
                 }
             });
         }
+    }
+
+    //1. 커스텀 리스너 인터페이스 정의
+    public interface OnDelClickListener{
+        void onItemDelClick(Row rowItem);
+    }
+    //2. 리스너 객체 참조 저장 변수
+    private OnDelClickListener mListener = null;
+    //3. 리스너 객체 참조 어댑터에 전달하는 메서드
+    public void setOnDelClickListener(OnDelClickListener listener){
+        this.mListener = listener;
     }
 }
