@@ -38,13 +38,6 @@ android {
         dataBinding true
         viewBinding true
     }
-    /*
-    dataBinding {
-        enabled = true
-    }
-    viewBinding{
-        enabled = true
-    }*/
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
