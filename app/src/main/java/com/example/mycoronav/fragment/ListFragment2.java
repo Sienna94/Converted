@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.mycoronav.R;
 import com.example.mycoronav.adapter.ListViewAdapter;
+import com.example.mycoronav.adapter.ListViewAdapter2;
 import com.example.mycoronav.databinding.FragmentListBinding;
 import com.example.mycoronav.viewmodel.SharedViewModel;
 import com.example.mycoronav.vo.Row;
@@ -27,14 +28,16 @@ import java.util.ArrayList;
 public class ListFragment2 extends Fragment {
     private FragmentListBinding binding;
     //adapter
-    private ListViewAdapter listViewAdapter;
+//    private ListViewAdapter listViewAdapter;
+    private ListViewAdapter2 listViewAdapter;
     private LinearLayoutManager linearLayoutManager;
     private SharedViewModel sharedViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        listViewAdapter = new ListViewAdapter(requireContext());
+//        listViewAdapter = new ListViewAdapter(requireContext());
+        listViewAdapter = new ListViewAdapter2();
         sharedViewModel = new SharedViewModel();
         //옵저빙하는 모든 페이지에 영향을 미칠 수도 있기 때문에 잘 고려해야함.
         //ex_ eventbus의 사이드이펙트
@@ -49,7 +52,8 @@ public class ListFragment2 extends Fragment {
     }
 
     public void setList(ArrayList<Row> rowItem){
-        listViewAdapter.setRowItem(rowItem);
+//        listViewAdapter.setRowItem(rowItem);
+        listViewAdapter.rowItem = rowItem;
 //        listViewAdapter.setOnClickDel();
         linearLayoutManager = new LinearLayoutManager(requireContext());
 
