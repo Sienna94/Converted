@@ -39,6 +39,7 @@ public class ViewPagerFragment2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         listFragment = new ListFragment2();
         gridFragment = new GridFragment();
         scrollFragment = new ScrollFragment();
@@ -49,12 +50,18 @@ public class ViewPagerFragment2 extends Fragment {
         viewPagerAdapter.addFragment(scrollFragment);
         //adpter
         binding.viewPager.setAdapter(viewPagerAdapter);
+        //indicator
+        binding.indicator.createDotPanel(
+                viewPagerAdapter.getItemCount(),
+                R.drawable.dot_not_selected,
+                R.drawable.dot_selected,
+                0
+        );
         binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-//                binding.indicator.selectDot(position);
-
+                binding.indicator.selectDot(position);
             }
         });
         //attach TabLayout
@@ -84,14 +91,5 @@ public class ViewPagerFragment2 extends Fragment {
             }
         }).attach();
         binding.viewPager.setCurrentItem(0);
-    //indicator
-//        binding.indicator.createDotPanel(
-//                viewPagerAdapter.getItemCount(),
-//                R.drawable.dot_not_selected,
-//                R.drawable.dot_selected,
-//                0
-//        );
-
     }
-
 }
