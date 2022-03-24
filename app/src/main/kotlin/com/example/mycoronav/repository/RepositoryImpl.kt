@@ -1,22 +1,17 @@
 package com.example.mycoronav.repository
 
 import android.util.Log
-import com.example.mycoronav.common.Constants
 import com.example.mycoronav.common.Constants2
-import com.example.mycoronav.network.RetrofitClient
 import com.example.mycoronav.network.RetrofitClient2
-import com.example.mycoronav.network.RetrofitService
 import com.example.mycoronav.network.RetrofitService2
-import com.example.mycoronav.vo.ResponseData
 import com.example.mycoronav.vo.Row
 import com.example.mycoronav.vo2.Hospital
-import com.example.mycoronav.vo2.Item
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 object RepositoryImpl : Repository2 {
-    private val retrofit = RetrofitClient2.getInstance().get()
+    private val retrofit = RetrofitClient2.INSTANCE.get()
     var rows: ArrayList<Row> = ArrayList()
     val retrofitService = retrofit.create(RetrofitService2::class.java)
     var onReturn: ((ArrayList<Row>) -> Unit)? = null

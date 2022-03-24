@@ -26,7 +26,7 @@ public final class RepositoryImpl2 implements Repository2 {
         return instance;
     }
 
-    private Retrofit retrofit = RetrofitClient2.getInstance().get();
+    private Retrofit retrofit = RetrofitClient2.INSTANCE.get();
     ArrayList<Row> rows = new ArrayList<>();
     RetrofitService2 retrofitService = retrofit.create(RetrofitService2.class);
     //onReturn 구현 필요
