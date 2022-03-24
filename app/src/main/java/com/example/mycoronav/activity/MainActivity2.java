@@ -1,5 +1,7 @@
 package com.example.mycoronav.activity;
 
+import android.app.AlertDialog;
+import android.app.Application;
 import android.os.Bundle;
 import android.view.View;
 
@@ -35,6 +37,18 @@ public class MainActivity2 extends AppCompatActivity implements ListFragment.Lis
             //send data to frags
             viewPagerFragment.listFragment.updateList(rows);
         });
+        //통신 실패시 alert창 띄우기
+        sharedViewModel.setOnFailure(new SharedViewModel2.OnFailure() {
+            @Override
+            public void onFailure() {
+                //질문
+                //
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity2.this);
+                builder.setMessage("통신 실패");
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
         getCoronaList();
         //프래그먼트를 세팅 후 통신값을 받아야한다.
         // UI 세팅 -> 통신 요청 -> progress bar ->
@@ -57,8 +71,6 @@ public class MainActivity2 extends AppCompatActivity implements ListFragment.Lis
         sharedViewModel.getRows();
         binding.progressCircular.setVisibility(View.GONE);
     }
-    //progress 는 UI getRows() 는 데이터 요청이므로
-    //
 
     @Override
     public void requestList() {

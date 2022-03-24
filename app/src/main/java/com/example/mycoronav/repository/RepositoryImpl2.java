@@ -1,7 +1,14 @@
 package com.example.mycoronav.repository;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.mycoronav.activity.MainActivity2;
 import com.example.mycoronav.common.Constants2;
 import com.example.mycoronav.network.RetrofitClient2;
 import com.example.mycoronav.network.RetrofitService2;
@@ -12,6 +19,7 @@ import com.example.mycoronav.vo2.Item;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +52,7 @@ public final class RepositoryImpl2 implements Repository2 {
     public void getHospitalItem(int pageNum) {
         ArrayList<Row> currentRows = new ArrayList<>();
         Map<String, String> params = new HashMap<>();
-        params.put("serviceKey", Constants2.KEY);
+        params.put("serviceKey", "Constants2.KEY");
         params.put("pageNo", Integer.toString(pageNum));
 
         retrofitService.getHospitalList(params)
@@ -85,7 +93,9 @@ public final class RepositoryImpl2 implements Repository2 {
                     @Override
                     public void onFailure(Call<Hospital> call, Throwable t) {
                         Log.d("ddd", "onFailure: t = ${t.message}");
-                        // error 시 문구 alert 팝업 노출
+                        //Alert listener로 전달해서 Activity에서 띄우도록
+                        //Context를 들고 있는 경우 해당 Activity가 종료됐을 때 오류 발생
+                        failureListener.onFailure();
                     }
                 });
     }
@@ -105,12 +115,21 @@ public final class RepositoryImpl2 implements Repository2 {
         return rows;
     }
 
-    //Interface
+    //Interface 통신 데이터 전달
     public interface OnReturnListener{
         void onReturn (ArrayList<Row> rows);
     }
     private OnReturnListener mListener = null;
     public void setOnReturnListener(OnReturnListener listener){
         this.mListener = listener;
+    }
+
+    //Interface 통신 실패 알림
+    public interface OnFailureListener{
+        void onFailure();
+    }
+    private OnFailureListener failureListener = null;
+    public void setOnFailureListener(OnFailureListener listener){
+        this.failureListener= listener;
     }
 }

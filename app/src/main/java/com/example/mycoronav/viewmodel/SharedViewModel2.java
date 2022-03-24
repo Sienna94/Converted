@@ -16,6 +16,12 @@ public class SharedViewModel2 extends ViewModel {
     private int page = 1;
 
     public void getRows(){
+        repository.setOnFailureListener(new RepositoryImpl2.OnFailureListener() {
+            @Override
+            public void onFailure() {
+                mFailure.onFailure();
+            }
+        });
         repository.setOnReturnListener(new RepositoryImpl2.OnReturnListener() {
             @Override
             public void onReturn(ArrayList<Row> rows) {
@@ -37,5 +43,13 @@ public class SharedViewModel2 extends ViewModel {
         page+=1;
         rows_live.postValue(repository.loadNextRow(page));
         //
+    }
+
+    public interface OnFailure{
+        void onFailure();
+    }
+    private OnFailure mFailure = null;
+    public void setOnFailure(OnFailure onFailure){
+        this.mFailure = onFailure;
     }
 }

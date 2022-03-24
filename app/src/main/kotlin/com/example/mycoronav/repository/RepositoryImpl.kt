@@ -57,6 +57,7 @@ object RepositoryImpl : Repository2 {
 
             override fun onFailure(call: Call<Hospital>, t: Throwable) {
                 Log.d("ddd", "onFailure: t = ${t.message}")
+
             }
 
         })
