@@ -26,7 +26,7 @@ public class ViewPagerAdapter2 extends FragmentStateAdapter {
         return fragments.size();
     }
 
-    public void addFragments(Fragment fragment){
+    public void addFragment(Fragment fragment){
         fragments.add(fragment);
         notifyItemInserted(fragments.size() - 1);
     }

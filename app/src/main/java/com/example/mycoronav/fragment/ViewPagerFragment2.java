@@ -1,6 +1,9 @@
 package com.example.mycoronav.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,19 +11,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.mycoronav.R;
-import com.example.mycoronav.adapter.ViewPagerAdapter;
+import com.example.mycoronav.adapter.ViewPagerAdapter2;
 import com.example.mycoronav.databinding.FragmentViewPagerBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class ViewPagerFragment2 extends Fragment {
     private FragmentViewPagerBinding binding;
-    private ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapter2 viewPagerAdapter;
     public ListFragment2 listFragment;
     public GridFragment gridFragment;
     public ScrollFragment scrollFragment;
@@ -44,7 +43,7 @@ public class ViewPagerFragment2 extends Fragment {
         gridFragment = new GridFragment();
         scrollFragment = new ScrollFragment();
         //add fragment to adapter
-        viewPagerAdapter = new ViewPagerAdapter(requireActivity());
+        viewPagerAdapter = new ViewPagerAdapter2(requireActivity());
         viewPagerAdapter.addFragment(listFragment);
         viewPagerAdapter.addFragment(gridFragment);
         viewPagerAdapter.addFragment(scrollFragment);
