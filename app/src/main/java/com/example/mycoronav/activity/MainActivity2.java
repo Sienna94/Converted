@@ -29,14 +29,11 @@ public class MainActivity2 extends AppCompatActivity implements ListFragment.Lis
         //binding.activity = this
         viewPagerFragment = new ViewPagerFragment2();
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel2.class);
-
-
         //옵저빙은 호출 메소드보다 먼저 시작되어야 한다.
-//        setFragments();
         setFragments();
         sharedViewModel.rows_live.observe(this, rows ->{
             //send data to frags
-            viewPagerFragment.listFragment.setList(rows);
+            viewPagerFragment.listFragment.updateList(rows);
         });
         getCoronaList();
         //프래그먼트를 세팅 후 통신값을 받아야한다.
@@ -60,9 +57,12 @@ public class MainActivity2 extends AppCompatActivity implements ListFragment.Lis
         sharedViewModel.getRows();
         binding.progressCircular.setVisibility(View.GONE);
     }
+    //progress 는 UI getRows() 는 데이터 요청이므로
+    //
 
     @Override
     public void requestList() {
         getCoronaList();
     }
+    // pull to refresh chk
 }

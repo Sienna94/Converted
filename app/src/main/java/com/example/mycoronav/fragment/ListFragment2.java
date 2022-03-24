@@ -39,11 +39,17 @@ public class ListFragment2 extends Fragment {
                 binding.swipeRefresh.setRefreshing(false);
             }
         });
+        setList();
+
         return binding.getRoot();
     }
-
-    public void setList(ArrayList<Row> rowItem){
-        listViewAdapter.rowItem = rowItem;
+    // 어댑터 및 레이아웃 매니저 설정 -> onCreate 에서 한번만
+    private void setList(){
+        //어댑터 및 manager 등록은 한번만 하도록 변경할 것.
+        //어댑터와 리사이클러뷰는 특별한 경우가 아니면
+        //한번만 바인딩하도록 한다. 이미 추가된 어댑터를 재활용하도록.
+        //layout manager도 미리 생성해놓고 달아줄 것.
+        //scroll listener도 마찬가지.
         listViewAdapter.setOnDelClickListener(new ListViewAdapter2.OnDelClickListener() {
             @Override
             public void onItemDelClick(Row rowItem, int position) {
@@ -56,11 +62,6 @@ public class ListFragment2 extends Fragment {
         binding.rvListView.setAdapter(listViewAdapter);
         binding.rvListView.setLayoutManager(linearLayoutManager);
 
-        //어댑터와 리사이클러뷰는 특별한 경우가 아니면
-        //한번만 바인딩하도록 한다. 이미 추가된 어댑터를 재활용하도록.
-        //layout manager도 미리 생성해놓고 달아줄 것.
-        //scroll listener도 마찬가지.
-
         binding.rvListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -71,5 +72,10 @@ public class ListFragment2 extends Fragment {
             }
         });
     }
-
+    // data 변화 -> UI 업데이트시 타 프래그먼트에서 변화가 생기면 어떻게 반영해야하는지 질문
+    // MainActivity에서 실행
+    public void updateList(ArrayList<Row> rowItem){
+        listViewAdapter.rowItem = rowItem;
+        binding.rvListView.getAdapter().notifyDataSetChanged();
+    }
 }

@@ -20,16 +20,25 @@ import retrofit2.Retrofit;
 
 public final class RepositoryImpl2 implements Repository2 {
     //싱글턴 구현
-    private static RepositoryImpl2 instance = new RepositoryImpl2();
+    //final 은 클래스 상속을 막는다.
+    //final 을 메소드 앞에 쓰면 오버라이딩이 안됨
+    // 오버로딩 : 동일한 메소드를
+    // 오버라이딩은 재정의. 상속관계가 전제
+    //final
+    // static final : 해당 클래스 내에서 유일한 static, final 은 변경이 안되므로 상수 기능을 하는 것.
+
+    private static final RepositoryImpl2 instance = new RepositoryImpl2();
     private RepositoryImpl2(){}
     public static RepositoryImpl2 getInstance() {
         return instance;
     }
+    //싱글턴과 멀티스레드 상황 숙지.
 
     private Retrofit retrofit = RetrofitClient2.INSTANCE.get();
-    ArrayList<Row> rows = new ArrayList<>();
     RetrofitService2 retrofitService = retrofit.create(RetrofitService2.class);
-    //onReturn 구현 필요
+    ArrayList<Row> rows = new ArrayList<>();
+    //들고 있을 필요가 없는 rows
+    // currenRows 와의 용도 구분이 뚜렷하지 않음.
 
     @Override
     public void getHospitalItem(int pageNum) {
@@ -43,34 +52,32 @@ public final class RepositoryImpl2 implements Repository2 {
                     @Override
                     public void onResponse(Call<Hospital> call, Response<Hospital> response) {
                         if (response.isSuccessful()) {
-                            if (response.isSuccessful()) {
-                                Log.d("ddd", "response.code =" + response.code());
-                                Log.d("ddd", "response.message =" + response.message());
+                            //successful 중
+                            Log.d("ddd", "response.code =" + response.code());
+                            Log.d("ddd", "response.message =" + response.message());
 
-                                Hospital result = response.body();
+                            Hospital result = response.body();
 //                                Iterator iterator = result.getBody().getItems().getItem().iterator();
 
-                                for(int i =0; i < result.getBody().getItems().getItem().size(); i++){
-                                    Item item = result.getBody().getItems().getItem().get(i);
+                            for(int i =0; i < result.getBody().getItems().getItem().size(); i++){
+                                Item item = result.getBody().getItems().getItem().get(i);
 
-                                    Row row = new Row();
-                                    row.setCorona19Id(item.getSidoCdNm());
-                                    row.setCorona19Date(item.getAddr());
-                                    row.setCorona19ContactHistory(item.getYadmNm());
+                                Row row = new Row();
+                                row.setCorona19Id(item.getSidoCdNm());
+                                row.setCorona19Date(item.getAddr());
+                                row.setCorona19ContactHistory(item.getYadmNm());
 
-                                    currentRows.add(row);
-                                }
+                                currentRows.add(row);
+                            }
 
-                                if(pageNum == 1){
-                                    rows = currentRows;
-                                    mListener.onReturn(rows);
-                                }else{
-                                    rows.addAll(currentRows);
-                                }
+                            if(pageNum == 1){
+                                rows = currentRows;
+                                mListener.onReturn(rows);
                             }else{
-                                Log.d("ddd", "onResponse: not notSuccessful=" + response.code());
+                                rows.addAll(currentRows);
                             }
                         }else{
+                            Log.d("ddd", "onResponse: not notSuccessful=" + response.code());
                             Log.d("ddd", "onResponse: not notSuccessful=" + response.message());
                         }
                     }
@@ -78,6 +85,7 @@ public final class RepositoryImpl2 implements Repository2 {
                     @Override
                     public void onFailure(Call<Hospital> call, Throwable t) {
                         Log.d("ddd", "onFailure: t = ${t.message}");
+                        // error 시 문구 alert 팝업 노출
                     }
                 });
     }
