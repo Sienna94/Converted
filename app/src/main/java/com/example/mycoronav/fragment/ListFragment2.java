@@ -35,7 +35,6 @@ public class ListFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        listViewAdapter = new ListViewAdapter(requireContext());
         listViewAdapter = new ListViewAdapter2();
         sharedViewModel = new SharedViewModel();
         //옵저빙하는 모든 페이지에 영향을 미칠 수도 있기 때문에 잘 고려해야함.
@@ -51,9 +50,14 @@ public class ListFragment2 extends Fragment {
     }
 
     public void setList(ArrayList<Row> rowItem){
-//        listViewAdapter.setRowItem(rowItem);
         listViewAdapter.rowItem = rowItem;
-//        listViewAdapter.setOnClickDel();
+        listViewAdapter.setOnDelClickListener(new ListViewAdapter2.OnDelClickListener() {
+            @Override
+            public void onItemDelClick(Row rowItem, int position) {
+                sharedViewModel.deleteRow(rowItem);
+                listViewAdapter.notifyItemRemoved(position);
+            }
+        });
         linearLayoutManager = new LinearLayoutManager(requireContext());
 
         binding.rvListView.setAdapter(listViewAdapter);
@@ -64,14 +68,12 @@ public class ListFragment2 extends Fragment {
         //layout manager도 미리 생성해놓고 달아줄 것.
         //scroll listener도 마찬가지.
 
-        //onclickdel HOF 처리 필요
-
         binding.rvListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(binding.rvListView.canScrollVertically(1)){
-                    sharedViewModel.loadMore();
+//                    sharedViewModel.loadMore();
                 }
             }
         });
