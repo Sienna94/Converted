@@ -1,10 +1,9 @@
 package com.example.mycoronav.network;
 
 import com.example.mycoronav.common.Constants;
+import com.example.mycoronav.common.Constants2;
 import com.tickaroo.tikxml.TikXml;
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory;
-
-import org.jetbrains.annotations.NotNull;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +31,7 @@ public final class RetrofitClient2 {
         TikXml parser = new TikXml.Builder().exceptionOnUnreadXml(false).build();
 
         return new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(Constants2.BASE_URL)
                 .client(client)
                 .addConverterFactory(TikXmlConverterFactory.create(parser))
                 .build();

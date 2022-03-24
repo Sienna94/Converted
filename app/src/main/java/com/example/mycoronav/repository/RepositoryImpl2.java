@@ -2,7 +2,7 @@ package com.example.mycoronav.repository;
 
 import android.util.Log;
 
-import com.example.mycoronav.common.Constants;
+import com.example.mycoronav.common.Constants2;
 import com.example.mycoronav.network.RetrofitClient2;
 import com.example.mycoronav.network.RetrofitService2;
 import com.example.mycoronav.vo.Row;
@@ -11,7 +11,6 @@ import com.example.mycoronav.vo2.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -36,7 +35,7 @@ public final class RepositoryImpl2 implements Repository2 {
     public void getHospitalItem(int pageNum) {
         ArrayList<Row> currentRows = new ArrayList<>();
         Map<String, String> params = new HashMap<>();
-        params.put("serviceKey", Constants.KEY);
+        params.put("serviceKey", Constants2.KEY);
         params.put("pageNo", Integer.toString(pageNum));
 
         retrofitService.getHospitalList(params)

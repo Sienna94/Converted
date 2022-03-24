@@ -2,6 +2,7 @@ package com.example.mycoronav.repository
 
 import android.util.Log
 import com.example.mycoronav.common.Constants
+import com.example.mycoronav.common.Constants2
 import com.example.mycoronav.network.RetrofitClient
 import com.example.mycoronav.network.RetrofitClient2
 import com.example.mycoronav.network.RetrofitService
@@ -24,7 +25,7 @@ object RepositoryImpl : Repository2 {
         val currentRows = ArrayList<Row>()
 
         val params = mapOf(
-            "serviceKey" to Constants.KEY,
+            "serviceKey" to Constants2.KEY,
             "pageNo" to pageNum.toString()
         )
         retrofitService.getHospitalList(

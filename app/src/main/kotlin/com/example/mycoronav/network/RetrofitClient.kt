@@ -2,6 +2,7 @@ package com.example.mycoronav.network
 
 import android.util.Log
 import com.example.mycoronav.common.Constants
+import com.example.mycoronav.common.Constants2
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
@@ -22,7 +23,7 @@ object RetrofitClient {
         val parser = TikXml.Builder().exceptionOnUnreadXml(false).build()
 
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants2.BASE_URL)
             .client(client)
             .addConverterFactory(TikXmlConverterFactory.create(parser))
             .build()

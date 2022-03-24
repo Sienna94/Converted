@@ -3,8 +3,7 @@ package com.example.mycoronav.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.mycoronav.common.Constants;
-import com.example.mycoronav.repository.RepositoryImpl;
+import com.example.mycoronav.common.Constants2;
 import com.example.mycoronav.repository.RepositoryImpl2;
 import com.example.mycoronav.vo.Row;
 
@@ -17,7 +16,7 @@ public class SharedViewModel2 extends ViewModel {
     private int page = 1;
 
     public void getRows(){
-        repository.getHospitalItem(Constants.START_PAGE);
+        repository.getHospitalItem(Constants2.START_PAGE);
         repository.setOnReturnListener(new RepositoryImpl2.OnReturnListener() {
             @Override
             public void onReturn(ArrayList<Row> rows) {
