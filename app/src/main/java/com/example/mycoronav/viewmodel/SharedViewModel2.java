@@ -31,4 +31,14 @@ public class SharedViewModel2 extends ViewModel {
         rows_live.postValue(repository.loadNextRow(page));
     }
 
+    //onReturn 대체
+    public interface OnReturnListener{
+        void returnList(ArrayList<Row> list);
+    }
+
+    private OnReturnListener mListener = null;
+
+    public void setOnReturnListener(OnReturnListener listener){
+        this.mListener = listener;
+    }
 }

@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object RepositoryImpl : Repository {
+object RepositoryImpl : Repository2 {
     private val retrofit = RetrofitClient2.getInstance().get()
     var rows: ArrayList<Row> = ArrayList()
     val retrofitService = retrofit.create(RetrofitService2::class.java)
