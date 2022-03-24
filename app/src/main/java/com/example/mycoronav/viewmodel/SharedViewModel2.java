@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.mycoronav.common.Constants;
 import com.example.mycoronav.repository.RepositoryImpl;
+import com.example.mycoronav.repository.RepositoryImpl2;
 import com.example.mycoronav.vo.Row;
 
 import java.util.ArrayList;
@@ -12,14 +13,17 @@ import java.util.ArrayList;
 public class SharedViewModel2 extends ViewModel {
     //livedata
     public MutableLiveData<ArrayList<Row>> rows_live = new MutableLiveData<>();
-    private RepositoryImpl repository;
+    private RepositoryImpl2 repository = RepositoryImpl2.getInstance();
     private int page = 1;
 
     public void getRows(){
         repository.getHospitalItem(Constants.START_PAGE);
-//        repository.setOnReturn( rows ->
-//
-//        );
+        repository.setOnReturnListener(new RepositoryImpl2.OnReturnListener() {
+            @Override
+            public void onReturn(ArrayList<Row> rows) {
+                rows_live.postValue(rows);
+            }
+        });
     }
 
     public void deleteRow(Row row){
@@ -29,16 +33,5 @@ public class SharedViewModel2 extends ViewModel {
     public void loadMore(){
         page+=1;
         rows_live.postValue(repository.loadNextRow(page));
-    }
-
-    //onReturn 대체
-    public interface OnReturnListener{
-        void returnList(ArrayList<Row> list);
-    }
-
-    private OnReturnListener mListener = null;
-
-    public void setOnReturnListener(OnReturnListener listener){
-        this.mListener = listener;
     }
 }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mycoronav.adapter.ListViewAdapter
 import com.example.mycoronav.databinding.FragmentListBinding
-import com.example.mycoronav.viewmodel.SharedViewModel
+import com.example.mycoronav.viewmodel.SharedViewModel2
 import com.example.mycoronav.vo.Row
 import java.util.*
 import kotlin.collections.ArrayList
@@ -27,7 +27,7 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
-    private val model: SharedViewModel by activityViewModels()
+    private val model: SharedViewModel2 by activityViewModels()
 
     //interface
     private lateinit var listRequestListener: ListRequestListener

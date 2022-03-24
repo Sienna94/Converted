@@ -10,7 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.example.mycoronav.databinding.FragmentScrollBinding
 import com.example.mycoronav.view.ScrollViewItem
-import com.example.mycoronav.viewmodel.SharedViewModel
+import com.example.mycoronav.viewmodel.SharedViewModel2
 import com.example.mycoronav.vo.Row
 
 import kotlinx.android.synthetic.main.fragment_scroll.*
@@ -19,7 +19,7 @@ class ScrollFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: FragmentScrollBinding
 
     //viewModel
-    private val model: SharedViewModel by activityViewModels()
+    private val model: SharedViewModel2 by activityViewModels()
 
     //interface
     private lateinit var listRequestListener: ListRequestListener

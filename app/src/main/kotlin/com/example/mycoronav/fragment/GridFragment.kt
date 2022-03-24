@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mycoronav.adapter.GridViewAdapter
 import com.example.mycoronav.databinding.FragmentGridBinding
-import com.example.mycoronav.viewmodel.SharedViewModel
+import com.example.mycoronav.viewmodel.SharedViewModel2
 import com.example.mycoronav.vo.Row
 
 class GridFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -21,7 +21,7 @@ class GridFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var gridViewAdapter: GridViewAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     //viewModel
-    private val model: SharedViewModel by activityViewModels()
+    private val model: SharedViewModel2 by activityViewModels()
 
     private lateinit var listRequestListener: ListRequestListener
 

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycoronav.databinding.ItemRowBinding;
-import com.example.mycoronav.viewmodel.SharedViewModel;
 import com.example.mycoronav.vo.Row;
 
 import java.util.ArrayList;

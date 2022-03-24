@@ -1,26 +1,19 @@
 package com.example.mycoronav.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mycoronav.R;
-import com.example.mycoronav.adapter.ListViewAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.mycoronav.adapter.ListViewAdapter2;
 import com.example.mycoronav.databinding.FragmentListBinding;
-import com.example.mycoronav.viewmodel.SharedViewModel;
+import com.example.mycoronav.viewmodel.SharedViewModel2;
 import com.example.mycoronav.vo.Row;
 
 import java.util.ArrayList;
@@ -30,13 +23,13 @@ public class ListFragment2 extends Fragment {
     //adapter
     private ListViewAdapter2 listViewAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private SharedViewModel sharedViewModel;
+    private SharedViewModel2 sharedViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         listViewAdapter = new ListViewAdapter2();
-        sharedViewModel = new SharedViewModel();
+        sharedViewModel = new SharedViewModel2();
         //옵저빙하는 모든 페이지에 영향을 미칠 수도 있기 때문에 잘 고려해야함.
         //ex_ eventbus의 사이드이펙트
         binding = FragmentListBinding.inflate(inflater, container, false);

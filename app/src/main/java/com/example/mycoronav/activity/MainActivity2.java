@@ -1,35 +1,25 @@
 package com.example.mycoronav.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mycoronav.R;
 import com.example.mycoronav.databinding.ActivityMainBinding;
 import com.example.mycoronav.fragment.GridFragment;
 import com.example.mycoronav.fragment.ListFragment;
-import com.example.mycoronav.fragment.ListFragment2;
 import com.example.mycoronav.fragment.ScrollFragment;
-import com.example.mycoronav.fragment.ViewPagerFragment;
 import com.example.mycoronav.fragment.ViewPagerFragment2;
-import com.example.mycoronav.viewmodel.SharedViewModel;
-import com.example.mycoronav.vo.Row;
-
-import java.util.ArrayList;
-import java.util.Objects;
+import com.example.mycoronav.viewmodel.SharedViewModel2;
 
 public class MainActivity2 extends AppCompatActivity implements ListFragment.ListRequestListener, GridFragment.ListRequestListener, ScrollFragment.ListRequestListener {
     private ActivityMainBinding binding;
     private ViewPagerFragment2 viewPagerFragment;
-    private SharedViewModel sharedViewModel;
+    private SharedViewModel2 sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +28,13 @@ public class MainActivity2 extends AppCompatActivity implements ListFragment.Lis
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         //binding.activity = this
         viewPagerFragment = new ViewPagerFragment2();
-        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel2.class);
 
 
         //옵저빙은 호출 메소드보다 먼저 시작되어야 한다.
 //        setFragments();
         setFragments();
-        sharedViewModel.getRows_live().observe(this, rows ->{
+        sharedViewModel.rows_live.observe(this, rows ->{
             //send data to frags
             viewPagerFragment.listFragment.setList(rows);
         });

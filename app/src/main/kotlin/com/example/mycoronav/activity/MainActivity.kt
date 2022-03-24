@@ -1,7 +1,6 @@
 package com.example.mycoronav.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,7 @@ import com.example.mycoronav.fragment.GridFragment
 import com.example.mycoronav.fragment.ListFragment
 import com.example.mycoronav.fragment.ScrollFragment
 import com.example.mycoronav.fragment.ViewPagerFragment
-import com.example.mycoronav.viewmodel.SharedViewModel
+import com.example.mycoronav.viewmodel.SharedViewModel2
 
 class MainActivity : AppCompatActivity(), ListFragment.ListRequestListener,
     GridFragment.ListRequestListener, ScrollFragment.ListRequestListener {
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity(), ListFragment.ListRequestListener,
     private var viewPagerFragment = ViewPagerFragment()
 
     //viewModel
-    val viewModel: SharedViewModel by viewModels()
+    val viewModel: SharedViewModel2 by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //after splash showed, set Theme default again
